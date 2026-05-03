@@ -1,0 +1,23 @@
+apiVersion: kaptain.org/1.17
+kind: kubernetes-product-aggregate
+
+spec:
+  global:
+    projectName:
+      stripRepositoryNamePrefix: test
+  contents:
+    - kubernetes-bundle-resources:[1.0,1.31.4.0)
+    - kubernetes-bundle-docker-retag:[1.0,2.0)
+    - kubernetes-bundle-vendor-helm-rendered:[1.0.1,2.0)
+    - kubernetes-app-manifests-only:[1.0,1.1.0)
+    - ghcr.io/kube-kaptain/vendor/vendor-envoy-gateway:[1.7.1.5,1.7.2.0)
+  main:
+    product:
+      allowLocalDefaultsOverride: false
+    hooks:
+      preBuild: test-hooks/pre-build.bash
+      preTaggingTests: test-hooks/pre-tagging-tests.bash
+      postVersionsAndNaming: test-hooks/post-versions-and-naming.bash
+      prePackagePrepare: test-hooks/pre-package-prepare.bash
+      postPackageTests: test-hooks/post-package-tests.bash
+      postBuild: test-hooks/post-build.bash
