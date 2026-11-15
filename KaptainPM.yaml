@@ -1,4 +1,4 @@
-apiVersion: kaptain.org/1.17
+apiVersion: kaptain.org/1.39
 kind: kubernetes-product-aggregate
 spec:
   global:
